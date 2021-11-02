@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "Behaviour",
+        "Lerp",
+        "Mathf"
+    ],
+
+    "omnisharp.enableEditorConfigSupport": true,
+
+    "folders": [],
+    "settings": {},
+    "editor.formatOnSave": true,
+}
