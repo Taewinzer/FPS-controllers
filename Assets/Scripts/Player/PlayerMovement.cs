@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private float fov;
     [SerializeField] private int baseFov = 110;
-    [SerializeField] private int fovMax = 115;
+    [SerializeField] private float fovMaxMultiplier = 1.15f;
     [SerializeField] private int slideFov;
     [SerializeField] private int sprintFov;
     [SerializeField] private float fovTime;
@@ -59,6 +59,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDrag = 6f;
     [SerializeField] private float airDrag = 0f;
     [SerializeField] private float slideDrag = 2f;
+
+    [Header("Bunny Hopping")]
+    [SerializeField] private bool canBHop = true;
+    [SerializeField] private float groundDragWait = 0.05f;
 
     private float verticalMovement;
     private float horizontalMovement;
@@ -190,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.75f, transform.position.z);
         MoveCamera.yOffset = -0.5f;
 
-        if (currentSpeed >= 8f && Time.time >= lastSlide + slideTime)
+        if (currentSpeed >= 8f && Time.time >= lastSlide + slideTime && isGrounded)
         {
             rb.AddForce(moveDir.normalized * slideForce, ForceMode.Impulse);
             lastSlide = Time.time;
@@ -250,19 +254,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (wallRun.isWallRunning)
         {
-            fov = baseFov + currentSpeed + 5;
+            fov = baseFov + currentSpeed / 2 + 5;
         }
         else
         {
-            fov = baseFov + currentSpeed;
+            fov = baseFov + currentSpeed / 2;
         }
 
-        if (fov > fovMax)
+        if (fov > baseFov * fovMaxMultiplier)
         {
-            fov = fovMax;
+            fov = baseFov * fovMaxMultiplier;
         }
 
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, fovTime);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, fovTime * Time.deltaTime);
     }
 
     private void FixedUpdate()

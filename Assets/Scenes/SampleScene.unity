@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6459f184ba64f42438653833aae9a963, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 9a49510caf330c74aa0f8a748b1aaf40, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2347,13 +2347,15 @@ MonoBehaviour:
   cam: {fileID: 75100746}
   fov: 0
   baseFov: 110
-  fovMax: 115
+  fovMaxMultiplier: 1.15
   slideFov: 0
   sprintFov: 0
   fovTime: 500
   groundDrag: 6
   airDrag: 0
   slideDrag: 4
+  canBHop: 1
+  groundDragWait: 0
   groundCheck: {fileID: 977668305}
   groundMask:
     serializedVersion: 2
